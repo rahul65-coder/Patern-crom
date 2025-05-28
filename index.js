@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 import cron from 'node-cron';
 import admin from 'firebase-admin';
-import serviceAccount from './huper-b9cbc-firebase-adminsdk-fbsvc-cdc905926d.json';
+import serviceAccount from './huper-b9cbc-firebase-adminsdk-fbsvc-cdc905926d.json' assert { type: "json" };
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
