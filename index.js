@@ -1,7 +1,10 @@
 import fetch from 'node-fetch';
 import cron from 'node-cron';
 import admin from 'firebase-admin';
-import serviceAccount from './huper-b9cbc-firebase-adminsdk-fbsvc-cdc905926d.json' assert { type: "json" };
+import fs from 'fs';
+
+// JSON config read karega
+const serviceAccount = JSON.parse(fs.readFileSync('./huper-b9cbc-firebase-adminsdk-fbsvc-cdc905926d.json', 'utf8'));
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -47,11 +50,4 @@ cron.schedule('* * * * *', async () => {
     } else {
       console.log("❌ No data found or API error.");
     }
-  } catch (err) {
-    console.error("🔥 Error:", err);
-  }
-});
-
-function detectPattern(results) {
-  return results.map(item => (item.number > 4 ? 'BIG' : 'SMALL')).join('-');
-}
+  
